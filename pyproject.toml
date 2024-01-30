@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "endstone-plugin"
+version = "0.1.0"
+dependencies = [
+    "endstone",
+]
+requires-python = ">=3.9"
+authors = [
+    { name = "Endstone Developers", email = "hello@endstone.dev" },
+]
+maintainers = [
+    { name = "Vincent Wu", email = "magicdroidx@gmail.com" },
+    { name = "Endstone Developers", email = "hello@endstone.dev" }
+]
+description = "Official Python plugin template for Endstone servers"
+readme = "README.md"
+license = { file = "LICENSE" }
+keywords = ["endstone", "plugin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://github.com/EndstoneMC/python-plugin-template"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/EndstoneMC/python-plugin-template.git"
+Issues = "https://github.com/EndstoneMC/python-plugin-template/issues"
+Changelog = "https://github.com/EndstoneMC/python-plugin-template/blob/main/CHANGELOG.md"
+
+[project.entry-points."endstone"]
+endstone_plugin = "endstone_plugin:PythonSamplePlugin"
