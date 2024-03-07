@@ -20,17 +20,17 @@ class ExamplePlugin(Plugin):
 
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         # You can also handle commands here instead of setting an executor in on_enable if you prefer
-        match (command.name, args):
-            case ("test", []):
+        match command.name, args:
+            case "test", []:
                 # handle /test
-                sender.send_message("Test!")
-            case ("test", [n]):
+                sender.send_message("Test!!")
+            case "test", [n]:
                 # handle /test n
-                sender.send_message(f"Test with number {n}!")
-            case (_, []):
+                sender.send_message(f"Test with number: {n}!")
+            case _, []:
                 # handle /* (wildcard)
                 sender.send_message(f"/{command.name} is executed from Python!")
-            case (_, *args):
+            case _, *args:
                 # handle /* args... (wildcard)
                 sender.send_message(f"/{command.name} is executed from Python with arguments {args}!")
 
