@@ -1,7 +1,7 @@
 from endstone.plugin import Plugin
 
 
-class PythonSamplePlugin(Plugin):
+class ExamplePlugin(Plugin):
     def on_load(self) -> None:
         self.logger.info("on_load is called!")
 

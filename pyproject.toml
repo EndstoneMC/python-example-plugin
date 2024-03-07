@@ -3,11 +3,9 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "endstone-plugin"
-version = "0.1.0"
-dependencies = [
-    "endstone",
-]
+name = "python-example-plugin"
+version = "0.2.0"
+dependencies = []
 requires-python = ">=3.9"
 authors = [
     { name = "Endstone Developers", email = "hello@endstone.dev" },
@@ -25,6 +23,9 @@ classifiers = [
     "Programming Language :: Python"
 ]
 
+[project.optional-dependencies]
+endstone = ["endstone~=1.20"]
+
 [project.urls]
 Homepage = "https://github.com/EndstoneMC/python-plugin-template"
 Documentation = "https://readthedocs.org"
@@ -33,4 +34,4 @@ Issues = "https://github.com/EndstoneMC/python-plugin-template/issues"
 Changelog = "https://github.com/EndstoneMC/python-plugin-template/blob/main/CHANGELOG.md"
 
 [project.entry-points."endstone"]
-endstone_plugin = "endstone_plugin:PythonSamplePlugin"
+python_example_plugin = "endstone_example:ExamplePlugin"
