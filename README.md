@@ -14,12 +14,15 @@ plugin to help developers start writing plugins for the Bedrock Dedicated Server
 python-plugin-template/ 
 ├── src/                          # Main source directory 
 │   └── endstone_plugin/          # Directory for the plugin package 
-│       └── __init__.py           # Initializer for the package, containing SamplePlugin class 
+│       ├── __init__.py           # Initializer for the package, importing ExamplePlugin class from example_plugin.py
+│       ├── example_plugin.py     # Implementation of ExamplePlugin class
+│       ├── python_command.py     # Implementation of custom command /python with an executor
+│       └── test_command.py       # Implementation of custom command /test without an executor
 ├── .gitignore                    # Git ignore rules
 ├── CHANGELOG.md                  # Changelogs
 ├── LICENSE                       # License details
 ├── README.md                     # This file
-└── pyproject.toml                # Plugin configuration file
+└── pyproject.toml                # Plugin configuration file which specifies the entrypoint
 ```
 
 ## Getting Started
