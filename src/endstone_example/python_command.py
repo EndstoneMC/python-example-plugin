@@ -24,14 +24,6 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!"""
 
 
-class PythonCommand(Command):
-    def __init__(self):
-        Command.__init__(self, "python")
-        self.description = "Zen of python"
-        self.usages = ["/python"]
-        self.aliases = ["py"]
-
-
 class PythonCommandExecutor(CommandExecutor):
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         sender.send_message(zen_of_python)

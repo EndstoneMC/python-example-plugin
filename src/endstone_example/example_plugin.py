@@ -1,8 +1,7 @@
 from endstone.command import Command, CommandSender
 from endstone.plugin import Plugin
 
-from endstone_example.python_command import PythonCommand, PythonCommandExecutor
-from endstone_example.test_command import TestCommand
+from endstone_example.python_command import PythonCommandExecutor
 
 
 class ExamplePlugin(Plugin):
@@ -11,9 +10,14 @@ class ExamplePlugin(Plugin):
 
     def on_enable(self) -> None:
         self.logger.info("on_enable is called!")
-        # note we pass in PythonCommand instead of PythonCommand() - use a class rather than an instance
-        self.register_command(PythonCommand).executor = PythonCommandExecutor()
-        self.register_command(TestCommand)
+
+        self.register_command(
+            name="python", description="Zen of python", usages=["/python"], aliases=["py"]
+        ).executor = PythonCommandExecutor()
+
+        self.register_command(
+            name="test", description="This is a test command from python", usages=["/test", "/test [value: int]"]
+        )
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
