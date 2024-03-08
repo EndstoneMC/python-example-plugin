@@ -16,8 +16,7 @@ python-plugin-template/
 │   └── endstone_plugin/          # Directory for the plugin package 
 │       ├── __init__.py           # Initializer for the package, importing ExamplePlugin class from example_plugin.py
 │       ├── example_plugin.py     # Implementation of ExamplePlugin class
-│       ├── python_command.py     # Implementation of custom command /python with an executor
-│       └── test_command.py       # Implementation of custom command /test without an executor
+│       └── python_command.py     # Custom command executor for /python
 ├── .gitignore                    # Git ignore rules
 ├── CHANGELOG.md                  # Changelogs
 ├── LICENSE                       # License details
