@@ -12,11 +12,20 @@ class ExamplePlugin(Plugin):
         self.logger.info("on_enable is called!")
 
         self.register_command(
-            name="python", description="Zen of python", usages=["/python"], aliases=["py"]
+            name="python",
+            description="Zen of python",
+            usages=["/python"],
+            aliases=["py"],
         ).executor = PythonCommandExecutor()
 
         self.register_command(
-            name="test", description="This is a test command from python", usages=["/test", "/test [value: int]"]
+            name="test",
+            description="This is a test command from python",
+            usages=[
+                "/test",
+                "/test [value: int]",
+                "/test [value: float]",
+            ],
         )
 
     def on_disable(self) -> None:
