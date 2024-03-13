@@ -3,7 +3,7 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "endstone-python-example-plugin"
+name = "endstone-example-plugin"
 version = "0.2.0"
 dependencies = []
 authors = [
@@ -15,7 +15,7 @@ license = { file = "LICENSE" }
 keywords = ["endstone", "plugin"]
 
 [project.urls]
-Homepage = "https://github.com/EndstoneMC/python-plugin-template"
+Homepage = "https://github.com/EndstoneMC/python-example-plugin"
 
 [project.entry-points."endstone"]
-python-example-plugin = "endstone_python_example_plugin:ExamplePlugin"
+example-plugin = "endstone_example_plugin:ExamplePlugin"
