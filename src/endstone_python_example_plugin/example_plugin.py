@@ -1,7 +1,7 @@
 from endstone.command import Command, CommandSender
 from endstone.plugin import Plugin
 
-from endstone_example.python_command import PythonCommandExecutor
+from endstone_python_example_plugin.python_command import PythonCommandExecutor
 
 
 class ExamplePlugin(Plugin):

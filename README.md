@@ -1,7 +1,6 @@
-# Endstone Python Plugin Template
+# Endstone Python Example Plugin
 
-Welcome to the official Python plugin template for Endstone. This repository provides a basic structure and a sample
-plugin to help developers start writing plugins for the Bedrock Dedicated Servers in Python using the Endstone API.
+Welcome to the Example Python plugin for Endstone servers.
 
 ## Prerequisites
 
@@ -11,17 +10,16 @@ plugin to help developers start writing plugins for the Bedrock Dedicated Server
 ## Structure Overview
 
 ```
-python-plugin-template/ 
-├── src/                          # Main source directory 
-│   └── endstone_plugin/          # Directory for the plugin package 
-│       ├── __init__.py           # Initializer for the package, importing ExamplePlugin class from example_plugin.py
-│       ├── example_plugin.py     # Implementation of ExamplePlugin class
-│       └── python_command.py     # Custom command executor for /python
-├── .gitignore                    # Git ignore rules
-├── CHANGELOG.md                  # Changelogs
-├── LICENSE                       # License details
-├── README.md                     # This file
-└── pyproject.toml                # Plugin configuration file which specifies the entrypoint
+python-example-plugin/ 
+├── src/                                    # Main source directory 
+│   └── endstone_python_example_plugin/     # Directory for the plugin package 
+│       ├── __init__.py                     # Initializer for the package, importing ExamplePlugin class from example_plugin.py
+│       ├── example_plugin.py               # Implementation of ExamplePlugin class
+│       └── python_command.py               # Custom command executor for /python
+├── .gitignore                              # Git ignore rules
+├── LICENSE                                 # License details
+├── README.md                               # This file
+└── pyproject.toml                          # Plugin configuration file which specifies the entrypoint
 ```
 
 ## Getting Started
@@ -29,23 +27,16 @@ python-plugin-template/
 1. **Clone this Repository**
 
    ```bash
-   git clone https://github.com/EndstoneMC/python-plugin-template.git
+   git clone https://github.com/EndstoneMC/python-example-plugin.git
    ```
 
 2. **Navigate to the Cloned Directory**
 
    ```bash
-   cd python-plugin-template
+   cd python-example-plugin
    ```
 
-3. **Configurate**
-    1. Open the `pyproject.toml` and change the `name` under the `[project]` section from `endstone-plugin` to your own
-       name for your plugin.
-    2. Rename the folder `src/endstone_plugin` to `src/{your_plugin_name}`.
-    3. Rename the `PythonSamplePlugin` class within `src/{your_plugin_name}/__init__.py` to, for example.
-    4. Open the `pyproject.toml` again and update the entrypoint under the `[project.entry-points."endstone"]` section.
-
-4. **Test Your Plugin**
+3. **Install Your Plugin**
 
    When developing the plugin, you may want to install an editable package to your Python environment, this allows you
    to update the codes without having to reinstall the package everytime:
@@ -57,7 +48,7 @@ python-plugin-template/
 
    Ensure your plugin is loaded correctly by checking the server logs or console for the log messages.
 
-5. **Package and Distribute Your Plugin**
+4. **Package and Distribute Your Plugin**
 
    When everything is good to go, you can package your plugin into a `.whl` (Wheel) file for easier distribution:
 
