@@ -7,6 +7,7 @@ from endstone_example.python_command import PythonCommandExecutor
 class ExamplePlugin(Plugin):
     name = "PythonExamplePlugin"
     version = "0.3.0"
+    api_version = "0.2"
     description = "Python example plugin for Endstone servers"
     authors = ["Endstone Developers <hello@endstone.dev>"]
     website = "https://github.com/EndstoneMC/python-example-plugin"
