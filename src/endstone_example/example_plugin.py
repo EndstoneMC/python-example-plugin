@@ -1,4 +1,5 @@
 from endstone.command import Command, CommandSender
+from endstone.event import ServerLoadEvent
 from endstone.plugin import Plugin
 
 from endstone_example.python_command import PythonCommandExecutor
@@ -53,6 +54,7 @@ class ExamplePlugin(Plugin):
     def on_enable(self) -> None:
         self.logger.info("on_enable is called!")
         self.get_command("python").executor = PythonCommandExecutor()
+        self.register_event_handler(self.on_server_load)  # TODO: use a decorate @event_handler instead
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
@@ -74,3 +76,7 @@ class ExamplePlugin(Plugin):
                 sender.send_message(f"/{command.name} is executed from Python with arguments {args}!")
 
         return True
+
+    # TODO: let's implement a @event_handler decorator
+    def on_server_load(self, event: ServerLoadEvent):
+        self.logger.info(f"{event.event_name} is passed to python plugin")
