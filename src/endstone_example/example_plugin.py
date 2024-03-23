@@ -1,3 +1,4 @@
+from endstone._internal.endstone_python import EventPriority
 from endstone.command import Command, CommandSender
 from endstone.event import ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
@@ -79,4 +80,8 @@ class ExamplePlugin(Plugin):
 
     @event_handler
     def on_server_load(self, event: ServerLoadEvent):
-        self.logger.info(f"{event.event_name} is passed to python plugin")
+        self.logger.info(f"{event.event_name} is passed to on_server_load")
+
+    @event_handler(priority=EventPriority.HIGH)
+    def on_server_load_2(self, event: ServerLoadEvent):
+        self.logger.info(f"{event.event_name} is passed to on_server_load_2. This will be called after on_server_load.")
