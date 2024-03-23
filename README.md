@@ -11,15 +11,15 @@ Welcome to the example Python plugin for Endstone servers.
 
 ```
 python-example-plugin/ 
-├── src/                             # Main source directory 
-│   └── endstone_example_plugin/     # Directory for the plugin package 
-│       ├── __init__.py              # Initializer for the package, importing ExamplePlugin class from example_plugin.py
-│       ├── example_plugin.py        # Implementation of ExamplePlugin class
-│       └── python_command.py        # Custom command executor for /python
-├── .gitignore                       # Git ignore rules
-├── LICENSE                          # License details
-├── README.md                        # This file
-└── pyproject.toml                   # Plugin configuration file which specifies the entrypoint
+├── src/                         # Main source directory 
+│   └── endstone_example/        # Directory for the plugin package 
+│       ├── __init__.py          # Initializer for the package, importing ExamplePlugin class from example_plugin.py
+│       ├── example_plugin.py    # Implementation of ExamplePlugin class
+│       └── python_command.py    # Custom command executor for /python
+├── .gitignore                   # Git ignore rules
+├── LICENSE                      # License details
+├── README.md                    # This file
+└── pyproject.toml               # Plugin configuration file which specifies the entrypoint
 ```
 
 ## Getting Started
