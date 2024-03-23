@@ -1,5 +1,5 @@
 from endstone.command import Command, CommandSender
-from endstone.event import ServerLoadEvent
+from endstone.event import ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
 
 from endstone_example.python_command import PythonCommandExecutor
@@ -7,7 +7,7 @@ from endstone_example.python_command import PythonCommandExecutor
 
 class ExamplePlugin(Plugin):
     name = "PythonExamplePlugin"
-    version = "0.3.0"
+    version = "0.4.0"
     api_version = "0.3"
     description = "Python example plugin for Endstone servers"
     authors = ["Endstone Developers <hello@endstone.dev>"]
@@ -54,7 +54,7 @@ class ExamplePlugin(Plugin):
     def on_enable(self) -> None:
         self.logger.info("on_enable is called!")
         self.get_command("python").executor = PythonCommandExecutor()
-        self.register_event_handler(self.on_server_load)  # TODO: use a decorate @event_handler instead
+        self.register_events(self)
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
@@ -77,6 +77,6 @@ class ExamplePlugin(Plugin):
 
         return True
 
-    # TODO: let's implement a @event_handler decorator
+    @event_handler
     def on_server_load(self, event: ServerLoadEvent):
         self.logger.info(f"{event.event_name} is passed to python plugin")
