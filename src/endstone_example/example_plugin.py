@@ -1,6 +1,5 @@
-from endstone._internal.endstone_python import EventPriority
 from endstone.command import Command, CommandSender
-from endstone.event import ServerLoadEvent, event_handler
+from endstone.event import EventPriority, ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
 
 from endstone_example.python_command import PythonCommandExecutor
