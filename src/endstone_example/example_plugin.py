@@ -2,6 +2,7 @@ from endstone.command import Command, CommandSender
 from endstone.event import EventPriority, ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
 
+from endstone_example.example_listener import ExampleListener
 from endstone_example.python_command import PythonCommandExecutor
 
 
@@ -54,7 +55,10 @@ class ExamplePlugin(Plugin):
     def on_enable(self) -> None:
         self.logger.info("on_enable is called!")
         self.get_command("python").executor = PythonCommandExecutor()
-        self.register_events(self)
+
+        self.register_events(self)  # register event listeners defined directly in Plugin class
+        self.listener = ExampleListener()
+        self.register_events(self.listener)  # you can also register event listeners in a separate class
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
