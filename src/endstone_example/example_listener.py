@@ -1,5 +1,5 @@
+from endstone import ColorFormat
 from endstone.event import ServerListPingEvent, event_handler, EventPriority
-from endstone.util import ColorFormat
 
 
 class ExampleListener:
