@@ -57,8 +57,8 @@ class ExamplePlugin(Plugin):
         self.get_command("python").executor = PythonCommandExecutor()
 
         self.register_events(self)  # register event listeners defined directly in Plugin class
-        self.listener = ExampleListener()
-        self.register_events(self.listener)  # you can also register event listeners in a separate class
+        self._listener = ExampleListener(self)
+        self.register_events(self._listener)  # you can also register event listeners in a separate class
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
