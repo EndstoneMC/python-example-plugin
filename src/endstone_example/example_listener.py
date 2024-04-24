@@ -4,7 +4,6 @@ from endstone.plugin import Plugin
 
 
 class ExampleListener:
-
     def __init__(self, plugin: Plugin):
         self._plugin = plugin
 
