@@ -1,3 +1,5 @@
+import datetime
+
 from endstone.command import Command, CommandSender
 from endstone.event import EventPriority, ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
@@ -60,6 +62,8 @@ class ExamplePlugin(Plugin):
         self._listener = ExampleListener(self)
         self.register_events(self._listener)  # you can also register event listeners in a separate class
 
+        self.server.scheduler.run_task_timer(self, self.log_time, 0, 20 * 10)  # every 10 seconds
+
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
 
@@ -88,3 +92,7 @@ class ExamplePlugin(Plugin):
     @event_handler(priority=EventPriority.HIGH)
     def on_server_load_2(self, event: ServerLoadEvent):
         self.logger.info(f"{event.event_name} is passed to on_server_load_2. This will be called after on_server_load.")
+
+    def log_time(self):
+        now = datetime.datetime.now()
+        self.logger.info(now.strftime("%c"))
