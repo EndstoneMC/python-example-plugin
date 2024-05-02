@@ -62,7 +62,7 @@ class ExamplePlugin(Plugin):
         self._listener = ExampleListener(self)
         self.register_events(self._listener)  # you can also register event listeners in a separate class
 
-        self.server.scheduler.run_task_timer(self, self.log_time, 0, 20 * 10)  # every 10 seconds
+        self.server.scheduler.run_task_timer(self, self.log_time, 0, 20 * 1)  # every second
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
@@ -94,5 +94,6 @@ class ExamplePlugin(Plugin):
         self.logger.info(f"{event.event_name} is passed to on_server_load_2. This will be called after on_server_load.")
 
     def log_time(self):
-        now = datetime.datetime.now()
-        self.logger.info(now.strftime("%c"))
+        now = datetime.datetime.now().strftime("%c")
+        for player in self.server.online_players:
+            player.send_popup(now)
