@@ -19,10 +19,10 @@ class ExampleListener:
         player = event.player
         self._plugin.logger.info(
             ColorFormat.YELLOW
-            + f"{player.name}[/{player.address}:{player.port}] joined the game with UUID {player.unique_id}"
+            + f"{player.name}[/{player.address}] joined the game with UUID {player.unique_id}"
         )
 
     @event_handler
     def on_player_quit(self, event: PlayerQuitEvent):
         player = event.player
-        self._plugin.logger.info(ColorFormat.YELLOW + f"{player.name}[/{player.address}:{player.port}] left the game.")
+        self._plugin.logger.info(ColorFormat.YELLOW + f"{player.name}[/{player.address}] left the game.")
