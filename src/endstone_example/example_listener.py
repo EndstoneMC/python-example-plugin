@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from endstone import ColorFormat
 from endstone.event import event_handler, EventPriority, PlayerJoinEvent, PlayerQuitEvent, ServerListPingEvent
@@ -11,7 +11,7 @@ class ExampleListener:
 
     @event_handler(priority=EventPriority.HIGHEST)
     def on_server_list_ping(self, event: ServerListPingEvent):
-        event.motd = ColorFormat.BOLD + ColorFormat.AQUA + datetime.now().strftime("%c")
+        event.motd = ColorFormat.BOLD + ColorFormat.AQUA + datetime.datetime.now().strftime("%c")
         event.level_name = f"Your IP is {ColorFormat.YELLOW}{event.remote_host}:{event.remote_port}{ColorFormat.RESET}"
 
     @event_handler
