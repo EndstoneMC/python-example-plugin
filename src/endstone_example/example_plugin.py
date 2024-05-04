@@ -33,13 +33,22 @@ class ExamplePlugin(Plugin):
             ],
             "permissions": ["python_example.command.test"],
         },
+        "kickme": {
+            "description": "Ask the server to kick you with a custom message",
+            "usages": ["/kickme [reason: message]"],
+            "permissions": ["python_example.command.kickme"],
+        },
     }
 
     permissions = {
         "python_example.command": {
             "description": "Allow users to use all commands provided by this plugin.",
             "default": True,
-            "children": {"python_example.command.python": True, "python_example.command.test": True},
+            "children": {
+                "python_example.command.python": True,
+                "python_example.command.test": True,
+                "python_example.command.kickme": True,
+            },
         },
         "python_example.command.python": {
             "description": "Allow users to use the /python command.",
@@ -47,6 +56,10 @@ class ExamplePlugin(Plugin):
         },
         "python_example.command.test": {
             "description": "Allow users to use the /test command.",
+            "default": True,
+        },
+        "python_example.command.kickme": {
+            "description": "Allow users to use the /kickme command.",
             "default": True,
         },
     }
@@ -69,19 +82,23 @@ class ExamplePlugin(Plugin):
 
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         # You can also handle commands here instead of setting an executor in on_enable if you prefer
-        match command.name, args:
-            case "test", []:
-                # handle /test
-                sender.send_message("Test!!")
-            case "test", [n]:
-                # handle /test n
-                sender.send_message(f"Test with number: {n}!")
-            case _, []:
-                # handle /* (wildcard)
-                sender.send_message(f"/{command.name} is executed from Python!")
-            case _, *args:
-                # handle /* args... (wildcard)
-                sender.send_message(f"/{command.name} is executed from Python with arguments {args}!")
+
+        match command.name:
+            case "test":
+                if len(args) > 0:
+                    sender.send_message(f"Test with number: {args[0]}!")
+                else:
+                    sender.send_message("Test!!")
+            case "kickme":
+                player = sender.as_player()
+                if player is None:
+                    sender.send_error_message("You must be a player to execute this command.")
+                    return False
+
+                if len(args) > 0:
+                    player.kick(args[0])
+                else:
+                    player.kick("You asked for it!")
 
         return True
 
