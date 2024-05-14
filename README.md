@@ -53,12 +53,15 @@ python-example-plugin/
    When everything is good to go, you can package your plugin into a `.whl` (Wheel) file for easier distribution:
 
    ```bash
-   pip install wheel
-   python -m pip wheel . --no-deps --wheel-dir=wheelhouse
+   pip install pipx
+   pipx run build --wheel
    ```
 
-   This command will produce a `.whl` file in the `wheelhouse` directory which can be installed. To publish your plugin
-   to a package index such as PyPI, please refer to:
+   This command will produce a `.whl` file in the `dist` directory. Copy the `.whl` file to the `plugins` directory
+   of your Endstone server. Start the Endstone server and check the logs to ensure your plugin loads and operates
+   as expected.
+
+   To publish your plugin to a package index such as PyPI, please refer to:
     - [Using TestPyPI](https://packaging.python.org/en/latest/guides/using-testpypi/)
     - [Publishing package distribution releases using GitHub Actions CI/CD workflows](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
 

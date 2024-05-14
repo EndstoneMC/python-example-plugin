@@ -82,7 +82,6 @@ class ExamplePlugin(Plugin):
 
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         # You can also handle commands here instead of setting an executor in on_enable if you prefer
-
         match command.name:
             case "test":
                 if len(args) > 0:
