@@ -18,9 +18,12 @@ class ExampleListener:
     def on_player_join(self, event: PlayerJoinEvent):
         player = event.player
         self._plugin.logger.info(
-            ColorFormat.YELLOW
-            + f"{player.name}[/{player.address}] joined the game with UUID {player.unique_id}"
+            ColorFormat.YELLOW + f"{player.name}[/{player.address}] joined the game with UUID {player.unique_id}"
         )
+
+        # example of explicitly removing one's permission of using /me command
+        player.add_attachment(self._plugin, "minecraft.command.me", False)
+        player.update_commands()  # don't forget to resend the commands
 
     @event_handler
     def on_player_quit(self, event: PlayerQuitEvent):
