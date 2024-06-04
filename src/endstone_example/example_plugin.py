@@ -107,7 +107,8 @@ class ExamplePlugin(Plugin):
 
     @event_handler(priority=EventPriority.HIGH)
     def on_server_load_2(self, event: ServerLoadEvent):
-        self.logger.info(f"{event.event_name} is passed to on_server_load_2. This will be called after on_server_load.")
+        # this will be called after on_server_load because of a higher priority
+        self.server.dispatch_command(self.server.command_sender, "say Hello world!")
 
     def log_time(self):
         now = datetime.datetime.now().strftime("%c")
