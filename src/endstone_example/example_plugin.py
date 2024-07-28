@@ -9,12 +9,8 @@ from endstone_example.python_command import PythonCommandExecutor
 
 
 class ExamplePlugin(Plugin):
-    name = "PythonExamplePlugin"
-    version = "0.4.0"
+    prefix = "PythonExamplePlugin"
     api_version = "0.4"
-    description = "Python example plugin for Endstone servers"
-    authors = ["Endstone Developers <hello@endstone.dev>"]
-    website = "https://github.com/EndstoneMC/python-example-plugin"
     load = "POSTWORLD"
 
     commands = {
@@ -23,15 +19,6 @@ class ExamplePlugin(Plugin):
             "usages": ["/python"],
             "aliases": ["py"],
             "permissions": ["python_example.command.python"],
-        },
-        "test": {
-            "description": "This is a test command from python",
-            "usages": [
-                "/test",
-                "/test [value: int]",
-                "/test [value: float]",
-            ],
-            "permissions": ["python_example.command.test"],
         },
         "kickme": {
             "description": "Ask the server to kick you with a custom message",
@@ -72,10 +59,9 @@ class ExamplePlugin(Plugin):
         self.get_command("python").executor = PythonCommandExecutor()
 
         self.register_events(self)  # register event listeners defined directly in Plugin class
-        self._listener = ExampleListener(self)
-        self.register_events(self._listener)  # you can also register event listeners in a separate class
+        self.register_events(ExampleListener(self))  # you can also register event listeners in a separate class
 
-        self.server.scheduler.run_task_timer(self, self.log_time, 0, 20 * 1)  # every second
+        self.server.scheduler.run_task(self, self.log_time, delay=0, period=20 * 1)  # every second
 
     def on_disable(self) -> None:
         self.logger.info("on_disable is called!")
@@ -83,11 +69,6 @@ class ExamplePlugin(Plugin):
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         # You can also handle commands here instead of setting an executor in on_enable if you prefer
         match command.name:
-            case "test":
-                if len(args) > 0:
-                    sender.send_message(f"Test with number: {args[0]}!")
-                else:
-                    sender.send_message("Test!!")
             case "kickme":
                 player = sender.as_player()
                 if player is None:
@@ -108,7 +89,7 @@ class ExamplePlugin(Plugin):
     @event_handler(priority=EventPriority.HIGH)
     def on_server_load_2(self, event: ServerLoadEvent):
         # this will be called after on_server_load because of a higher priority
-        self.server.dispatch_command(self.server.command_sender, "say Hello world!")
+        self.logger.info(f"{event.event_name} is passed to on_server_load2")
 
     def log_time(self):
         now = datetime.datetime.now().strftime("%c")
