@@ -33,17 +33,12 @@ class ExamplePlugin(Plugin):
             "default": True,
             "children": {
                 "python_example.command.python": True,
-                "python_example.command.test": True,
                 "python_example.command.kickme": True,
             },
         },
         "python_example.command.python": {
             "description": "Allow users to use the /python command.",
             "default": "op",
-        },
-        "python_example.command.test": {
-            "description": "Allow users to use the /test command.",
-            "default": True,
         },
         "python_example.command.kickme": {
             "description": "Allow users to use the /kickme command.",
