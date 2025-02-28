@@ -10,7 +10,7 @@ from endstone_example.python_command import PythonCommandExecutor
 
 class ExamplePlugin(Plugin):
     prefix = "PythonExamplePlugin"
-    api_version = "0.5"
+    api_version = "0.6"
     load = "POSTWORLD"
 
     commands = {
