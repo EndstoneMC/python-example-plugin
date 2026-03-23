@@ -2,68 +2,82 @@
 
 [![Build](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml)
 
-An example Python plugin for [Endstone](https://github.com/EndstoneMC/endstone) servers, demonstrating commands,
-events, configuration, and permissions.
+A starter template for building [Endstone](https://github.com/EndstoneMC/endstone) plugins in Python.
+Demonstrates commands, events, configuration, and permissions.
 
-## Prerequisites
+## Use This Template
 
-- Python 3.10 or higher
-- [uv](https://docs.astral.sh/uv/) (recommended) or pip
+1. Click **Use this template** on GitHub (or fork/clone it)
+2. Rename the following to match your plugin:
 
-## Getting Started
+| What | Where | Example |
+|------|-------|---------|
+| Package name | `pyproject.toml` `[project] name` | `endstone-my-plugin` |
+| Package directory | `src/endstone_example/` | `src/endstone_my_plugin/` |
+| Entry point | `pyproject.toml` `[project.entry-points."endstone"]` | `my-plugin = "endstone_my_plugin:MyPlugin"` |
+| Plugin class | `plugin.py` class name + `prefix` | `MyPlugin`, `prefix = "MyPlugin"` |
+| Permission prefix | `plugin.py` `permissions` dict keys | `my_plugin.command.*` |
 
-1. **Clone this repository**
+3. Set `api_version = "0.11"` (or the Endstone version you target)
+4. Delete the example command/listener code and start building
 
-   ```bash
-   git clone https://github.com/EndstoneMC/python-example-plugin.git
-   cd python-example-plugin
-   ```
+## Development
 
-2. **Install in development mode**
+```bash
+git clone https://github.com/EndstoneMC/python-example-plugin.git
+cd python-example-plugin
+uv sync --extra dev       # Install dependencies
+uv run ruff check src/    # Lint
+```
 
-   ```bash
-   uv sync --extra dev
-   ```
+For live development on a running server, activate the server's virtualenv and install in
+editable mode:
 
-3. **Run linting**
+```bash
+pip install -e .
+```
 
-   ```bash
-   uv run ruff check src/
-   ```
+Then use `/reload` in-game to pick up code changes without restarting.
 
-4. **Build a wheel for distribution**
-
-   ```bash
-   uv build
-   ```
-
-   Copy the `.whl` from `dist/` into your Endstone server's `plugins/` folder.
-
-## Structure
+## Project Structure
 
 ```
-python-example-plugin/
-├── src/
-│   └── endstone_example/
-│       ├── __init__.py       # Package entry point, re-exports ExamplePlugin
-│       ├── plugin.py         # Plugin class: lifecycle, config, commands
-│       ├── listener.py       # Event listener: player join/quit
-│       └── config.toml       # Default plugin configuration
-├── .github/
-│   ├── dependabot.yml       # Automated dependency updates
-│   └── workflows/
-│       ├── build.yml        # CI: lint
-│       └── release.yml      # Release automation
-├── CHANGELOG.md             # Release notes (keepachangelog format)
-├── pyproject.toml           # Build config, dependencies, tool settings
-├── LICENSE                  # MIT License
-└── README.md                # This file
+src/endstone_example/
+  __init__.py       Re-exports the plugin class
+  plugin.py         Plugin lifecycle, commands, config
+  listener.py       Event listener (player join/quit)
+  config.toml       Default config (copied on first run)
 ```
+
+## Install on a Server
+
+```bash
+uv build
+```
+
+Copy the `.whl` from `dist/` into your server's `plugins/` folder and restart.
+
+## Releasing
+
+This template includes a GitHub Actions release workflow. To make a release:
+
+1. Add your changes under `## [Unreleased]` in `CHANGELOG.md`
+2. Go to **Actions > Release > Run workflow**
+3. Enter the version (e.g. `0.5.0`) and run
+
+The workflow validates the version, updates the changelog, creates a git tag and GitHub release,
+builds the wheel, publishes to PyPI (if configured), and attaches the `.whl` to the release.
+
+Use **dry run** to preview without making changes.
+
+Versioning is handled automatically by [hatch-vcs](https://github.com/ofek/hatch-vcs): tagged
+commits get clean versions (e.g. `0.5.0`), untagged commits get dev versions
+(e.g. `0.5.1.dev3`).
 
 ## Documentation
 
-For more on the Endstone API, see the [documentation](https://endstone.readthedocs.io).
+For more on the Endstone API, see the [documentation](https://endstone.dev/latest/).
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+[MIT License](LICENSE)
