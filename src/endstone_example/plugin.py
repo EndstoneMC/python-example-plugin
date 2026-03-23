@@ -22,6 +22,11 @@ class ExamplePlugin(Plugin):
             "usages": ["/hello"],
             "permissions": ["example.command.hello"],
         },
+        "broadcast": {
+            "description": "Broadcast a message to all players",
+            "usages": ["/broadcast <message: message>"],
+            "permissions": ["example.command.broadcast"],
+        },
     }
 
     # Permissions are declared separately from commands. The "default" field controls
@@ -31,6 +36,10 @@ class ExamplePlugin(Plugin):
         "example.command.hello": {
             "description": "Allow users to use the /hello command.",
             "default": True,
+        },
+        "example.command.broadcast": {
+            "description": "Allow users to use the /broadcast command.",
+            "default": "op",
         },
     }
 
@@ -64,8 +73,9 @@ class ExamplePlugin(Plugin):
         """
         match command.name:
             case "hello":
-                # Read the greeting from config.toml (editable by server admins)
-                greeting = self.config["greeting"]
+                # Use .get() with a default to avoid crashing if the key is missing
+                # from config.toml (e.g. if the admin deleted it).
+                greeting = self.config.get("greeting", "Hello")
 
                 # Use isinstance to tailor behavior to the sender type.
                 # This is a common pattern since players and the console have
@@ -77,5 +87,16 @@ class ExamplePlugin(Plugin):
                     self.logger.info(f"{greeting} from the console!")
                 else:
                     sender.send_message(f"{greeting}!")
+
+            case "broadcast":
+                # args contains everything after the command name.
+                # The "message" parameter type captures the rest of the line as one string.
+                if not args:
+                    sender.send_error_message("Usage: /broadcast <message>")
+                    return False
+
+                message = " ".join(args)
+                prefix = self.config.get("broadcast_prefix", "[Broadcast]")
+                self.server.broadcast_message(f"{prefix} {message}")
 
         return True

@@ -6,7 +6,7 @@ event handling logic organized and out of the main plugin class.
 """
 
 from endstone import ColorFormat
-from endstone.event import PlayerJoinEvent, PlayerQuitEvent, event_handler
+from endstone.event import EventPriority, PlayerJoinEvent, PlayerQuitEvent, event_handler
 from endstone.plugin import Plugin
 
 
@@ -15,9 +15,14 @@ class ExampleListener:
         # Keep a reference to the plugin so we can use its logger and config.
         self._plugin = plugin
 
-    @event_handler
+    @event_handler(priority=EventPriority.HIGH)
     def on_player_join(self, event: PlayerJoinEvent) -> None:
-        """Called when a player joins the server."""
+        """Called when a player joins the server.
+
+        The priority=HIGH means this handler runs after NORMAL-priority handlers,
+        useful when you want to override or finalize values set by other plugins.
+        Priorities (lowest runs first): LOWEST, LOW, NORMAL, HIGH, HIGHEST, MONITOR.
+        """
         player = event.player
 
         # Modify the join message broadcast to all players.

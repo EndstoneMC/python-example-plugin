@@ -3,7 +3,9 @@
 [![Build](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml)
 
 A starter template for building [Endstone](https://github.com/EndstoneMC/endstone) plugins in Python.
-Demonstrates commands, events, configuration, and permissions.
+Endstone is a plugin framework for Minecraft Bedrock Dedicated Server, similar to
+Bukkit/Spigot/Paper for Java Edition. This template demonstrates commands, events,
+configuration, and permissions.
 
 ## Use This Template
 
@@ -22,6 +24,10 @@ Demonstrates commands, events, configuration, and permissions.
 4. Delete the example command/listener code and start building
 
 ## Development
+
+This template uses [uv](https://docs.astral.sh/uv/) for fast dependency management. If you
+prefer pip, replace `uv sync` with `pip install -e ".[dev]"` and `uv run` with just running
+the command directly.
 
 ```bash
 git clone https://github.com/EndstoneMC/python-example-plugin.git

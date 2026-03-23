@@ -186,8 +186,9 @@ max_homes = 3
 ```python
 def on_enable(self) -> None:
     self.save_default_config()
-    greeting = self.config["greeting"]
-    max_homes = self.config["max_homes"]
+    # Use .get() with defaults to avoid KeyError if the admin removes a key
+    greeting = self.config.get("greeting", "Hello")
+    max_homes = self.config.get("max_homes", 3)
 ```
 
 ## Scheduler

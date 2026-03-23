@@ -29,6 +29,8 @@ dev = ["endstone", "ruff"]
 
 [project.urls]
 Homepage = "https://github.com/EndstoneMC/python-example-plugin"
+Documentation = "https://endstone.dev/latest/"
+Changelog = "https://github.com/EndstoneMC/python-example-plugin/blob/main/CHANGELOG.md"
 Issues = "https://github.com/EndstoneMC/python-example-plugin/issues"
 
 [project.entry-points."endstone"]

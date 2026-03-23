@@ -1,2 +1,9 @@
 # The greeting message sent by the /hello command
 greeting = "Hello"
+
+# Prefix shown before /broadcast messages
+broadcast_prefix = "[Broadcast]"
+
+# Enable verbose logging for debugging (not used by default, but shows
+# how plugins typically expose debug toggles to server admins)
+debug = false
