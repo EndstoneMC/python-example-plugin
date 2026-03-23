@@ -8,9 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 - Overhauled plugin examples to focus on essential patterns: lifecycle, config, commands, events
-- Simplified to one command (`/hello`) demonstrating `isinstance` sender checks and config usage
-- Simplified listener to player join/quit with custom messages
-- Removed scheduler, permission attachment, and priority examples (too advanced for a starter template)
+- Two commands (`/hello`, `/broadcast`) demonstrating `isinstance` sender checks, config usage, and arguments
+- Simplified listener to player join/quit with event priority example
 - Modernized build system with hatch-vcs for automatic git-tag versioning
 - Switched from pip to uv for dependency management and builds
 - Updated minimum Python version to 3.10
@@ -18,12 +17,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Simplified source file names (plugin.py, listener.py)
 - CI now runs linting (ruff)
 - Replaced publish workflow with full release automation (changelog, tagging, PyPI, GitHub release)
+- README rewritten as a practical template quickstart with renaming guide, dependency instructions, and release docs
+- Fixed deprecated ServerListPingEvent API (remote_host/remote_port to address)
 
 ### Added
-- Default config.toml demonstrating plugin configuration
-- Ruff linting configuration
-- Dependabot for automated dependency updates
-- CHANGELOG.md following Keep a Changelog format
+- AGENTS.md to guide AI coding agents building Endstone plugins
+- Default config.toml with multiple value types (string, bool)
+- Comments and docstrings throughout example code explaining what and why
+- CONTRIBUTING.md, bug report and feature request issue templates
+- Ruff linting and Dependabot configuration
 
 ### Removed
 - Separate CommandExecutor class (command.py); on_command approach is simpler for examples
+- Scheduler, permission attachment examples (too advanced for a starter template)
