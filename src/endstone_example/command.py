@@ -1,4 +1,4 @@
-from endstone.command import Command, CommandSender, CommandExecutor
+from endstone.command import Command, CommandExecutor, CommandSender
 
 # Zen of python - https://peps.python.org/pep-0020/
 zen_of_python = """The Zen of Python, by Tim Peters

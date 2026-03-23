@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
 name = "endstone-example"
-version = "0.4.0"
+dynamic = ["version"]
 dependencies = []
 authors = [
     { name = "Endstone Developers", email = "hello@endstone.dev" },
@@ -13,9 +13,35 @@ description = "Python example plugin for Endstone servers"
 readme = "README.md"
 license = { file = "LICENSE" }
 keywords = ["endstone", "plugin"]
+requires-python = ">=3.10"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+[project.optional-dependencies]
+dev = ["endstone", "ruff"]
 
 [project.urls]
 Homepage = "https://github.com/EndstoneMC/python-example-plugin"
+Issues = "https://github.com/EndstoneMC/python-example-plugin/issues"
 
 [project.entry-points."endstone"]
 example = "endstone_example:ExamplePlugin"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["I", "E", "F"]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/endstone_example/_version.py"

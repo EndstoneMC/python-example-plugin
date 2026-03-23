@@ -4,13 +4,13 @@ from endstone.command import Command, CommandSender
 from endstone.event import EventPriority, ServerLoadEvent, event_handler
 from endstone.plugin import Plugin
 
-from endstone_example.example_listener import ExampleListener
-from endstone_example.python_command import PythonCommandExecutor
+from endstone_example.command import PythonCommandExecutor
+from endstone_example.listener import ExampleListener
 
 
 class ExamplePlugin(Plugin):
     prefix = "PythonExamplePlugin"
-    api_version = "0.6"
+    api_version = "0.11"
     load = "POSTWORLD"
 
     commands = {
@@ -78,15 +78,15 @@ class ExamplePlugin(Plugin):
         return True
 
     @event_handler
-    def on_server_load(self, event: ServerLoadEvent):
+    def on_server_load(self, event: ServerLoadEvent) -> None:
         self.logger.info(f"{event.event_name} is passed to on_server_load")
 
     @event_handler(priority=EventPriority.HIGH)
-    def on_server_load_2(self, event: ServerLoadEvent):
+    def on_server_load_2(self, event: ServerLoadEvent) -> None:
         # this will be called after on_server_load because of a higher priority
         self.logger.info(f"{event.event_name} is passed to on_server_load2")
 
-    def log_time(self):
+    def log_time(self) -> None:
         now = datetime.datetime.now().strftime("%c")
         for player in self.server.online_players:
             player.send_popup(now)
