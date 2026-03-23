@@ -84,9 +84,20 @@ This template includes a GitHub Actions release workflow. To make a release:
 3. Enter the version (e.g. `0.5.0`) and run
 
 The workflow validates the version, updates the changelog, creates a git tag and GitHub release,
-builds the wheel, publishes to PyPI (if configured), and attaches the `.whl` to the release.
+builds the wheel, publishes to PyPI, and attaches the `.whl` to the release.
 
 Use **dry run** to preview without making changes.
+
+### First-time PyPI setup
+
+Before your first release, configure [trusted publishing](https://docs.pypi.org/trusted-publishers/)
+so the workflow can upload to PyPI without API tokens:
+
+1. Go to https://pypi.org/manage/account/publishing/
+2. Add a new **pending publisher** with your GitHub repo, workflow `release.yml`,
+   and environment `pypi`
+3. In your GitHub repo, go to **Settings > Environments** and create an environment
+   named `pypi`
 
 Versioning is handled automatically by [hatch-vcs](https://github.com/ofek/hatch-vcs): tagged
 commits get clean versions (e.g. `0.5.0`), untagged commits get dev versions
