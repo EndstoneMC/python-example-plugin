@@ -3,6 +3,7 @@
 from endstone import Player
 from endstone.command import Command, CommandSender, ConsoleCommandSender
 from endstone.plugin import Plugin
+from typing_extensions import override
 
 from endstone_example.listener import ExampleListener
 
@@ -43,6 +44,7 @@ class ExamplePlugin(Plugin):
         },
     }
 
+    @override
     def on_enable(self) -> None:
         """Called when the plugin is enabled. Use this for setup."""
 
@@ -56,10 +58,12 @@ class ExamplePlugin(Plugin):
 
         self.logger.info("ExamplePlugin enabled!")
 
+    @override
     def on_disable(self) -> None:
         """Called when the plugin is disabled. Use this for cleanup."""
         self.logger.info("ExamplePlugin disabled!")
 
+    @override
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
         """Called when a player or the console runs one of this plugin's commands.
 
