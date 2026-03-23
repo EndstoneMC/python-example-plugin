@@ -55,6 +55,18 @@ src/endstone_example/
   config.toml       Default config (copied on first run)
 ```
 
+## Adding Dependencies
+
+To use third-party packages from PyPI, add them to the `dependencies` list in `pyproject.toml`:
+
+```toml
+[project]
+dependencies = ["requests>=2.31", "aiosqlite>=0.19"]
+```
+
+Then run `uv sync` (or `pip install -e .`) to install them. They will be bundled automatically
+when you build the wheel.
+
 ## Install on a Server
 
 ```bash

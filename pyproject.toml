@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "endstone-example"
 dynamic = ["version"]
-dependencies = []
+dependencies = []  # Add third-party PyPI packages here, e.g. ["requests>=2.31"]
 authors = [
     { name = "Endstone Developers", email = "hello@endstone.dev" },
 ]
