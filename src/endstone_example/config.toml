@@ -1,0 +1,2 @@
+# The greeting message sent by the /hello command
+greeting = "Hello"

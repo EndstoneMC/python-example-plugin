@@ -3,7 +3,7 @@
 [![Build](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/EndstoneMC/python-example-plugin/actions/workflows/build.yml)
 
 An example Python plugin for [Endstone](https://github.com/EndstoneMC/endstone) servers, demonstrating commands,
-events, permissions, scheduled tasks, and separate listener/executor classes.
+events, configuration, and permissions.
 
 ## Prerequisites
 
@@ -46,9 +46,9 @@ python-example-plugin/
 ├── src/
 │   └── endstone_example/
 │       ├── __init__.py       # Package entry point, re-exports ExamplePlugin
-│       ├── plugin.py         # Plugin class with commands, events, scheduler
-│       ├── listener.py       # Separate event listener class
-│       └── command.py        # Custom CommandExecutor for /python
+│       ├── plugin.py         # Plugin class: lifecycle, config, commands
+│       ├── listener.py       # Event listener: player join/quit
+│       └── config.toml       # Default plugin configuration
 ├── .github/
 │   ├── dependabot.yml       # Automated dependency updates
 │   └── workflows/

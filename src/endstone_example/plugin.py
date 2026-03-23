@@ -1,92 +1,48 @@
-import datetime
-
-from endstone.command import Command, CommandSender
-from endstone.event import EventPriority, ServerLoadEvent, event_handler
+from endstone import Player
+from endstone.command import Command, CommandSender, ConsoleCommandSender
 from endstone.plugin import Plugin
 
-from endstone_example.command import PythonCommandExecutor
 from endstone_example.listener import ExampleListener
 
 
 class ExamplePlugin(Plugin):
-    prefix = "PythonExamplePlugin"
+    prefix = "ExamplePlugin"
     api_version = "0.11"
-    load = "POSTWORLD"
 
     commands = {
-        "python": {
-            "description": "Zen of python",
-            "usages": ["/python"],
-            "aliases": ["py"],
-            "permissions": ["python_example.command.python"],
-        },
-        "kickme": {
-            "description": "Ask the server to kick you with a custom message",
-            "usages": ["/kickme [reason: message]"],
-            "permissions": ["python_example.command.kickme"],
+        "hello": {
+            "description": "Send a greeting",
+            "usages": ["/hello"],
+            "permissions": ["example.command.hello"],
         },
     }
 
     permissions = {
-        "python_example.command": {
-            "description": "Allow users to use all commands provided by this plugin.",
-            "default": True,
-            "children": {
-                "python_example.command.python": True,
-                "python_example.command.kickme": True,
-            },
-        },
-        "python_example.command.python": {
-            "description": "Allow users to use the /python command.",
-            "default": "op",
-        },
-        "python_example.command.kickme": {
-            "description": "Allow users to use the /kickme command.",
+        "example.command.hello": {
+            "description": "Allow users to use the /hello command.",
             "default": True,
         },
     }
 
-    def on_load(self) -> None:
-        self.logger.info("on_load is called!")
-
     def on_enable(self) -> None:
-        self.logger.info("on_enable is called!")
-        self.get_command("python").executor = PythonCommandExecutor()
-
-        self.register_events(self)  # register event listeners defined directly in Plugin class
-        self.register_events(ExampleListener(self))  # you can also register event listeners in a separate class
-
-        self.server.scheduler.run_task(self, self.log_time, delay=0, period=20 * 1)  # every second
+        self.save_default_config()
+        self.register_events(ExampleListener(self))
+        self.logger.info("ExamplePlugin enabled!")
 
     def on_disable(self) -> None:
-        self.logger.info("on_disable is called!")
+        self.logger.info("ExamplePlugin disabled!")
 
     def on_command(self, sender: CommandSender, command: Command, args: list[str]) -> bool:
-        # You can also handle commands here instead of setting an executor in on_enable if you prefer
         match command.name:
-            case "kickme":
-                player = sender.as_player()
-                if player is None:
-                    sender.send_error_message("You must be a player to execute this command.")
-                    return False
+            case "hello":
+                greeting = self.config["greeting"]  # from config.toml
 
-                if len(args) > 0:
-                    player.kick(args[0])
+                # Use isinstance to check the sender type
+                if isinstance(sender, Player):
+                    sender.send_message(f"{greeting}, {sender.name}!")
+                elif isinstance(sender, ConsoleCommandSender):
+                    self.logger.info(f"{greeting} from the console!")
                 else:
-                    player.kick("You asked for it!")
+                    sender.send_message(f"{greeting}!")
 
         return True
-
-    @event_handler
-    def on_server_load(self, event: ServerLoadEvent) -> None:
-        self.logger.info(f"{event.event_name} is passed to on_server_load")
-
-    @event_handler(priority=EventPriority.HIGH)
-    def on_server_load_2(self, event: ServerLoadEvent) -> None:
-        # this will be called after on_server_load because of a higher priority
-        self.logger.info(f"{event.event_name} is passed to on_server_load2")
-
-    def log_time(self) -> None:
-        now = datetime.datetime.now().strftime("%c")
-        for player in self.server.online_players:
-            player.send_popup(now)
